@@ -1,0 +1,6 @@
+name: fastapi
+channels:
+  - conda-forge
+  - defaults
+requirements:
+
