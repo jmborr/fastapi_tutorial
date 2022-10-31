@@ -2,5 +2,9 @@ name: fastapi
 channels:
   - conda-forge
   - defaults
-requirements:
+dependencies:
+  - python==3.8
+  - pip
+  - uvicorn
+
 
