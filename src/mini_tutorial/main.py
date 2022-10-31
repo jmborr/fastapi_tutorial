@@ -31,7 +31,7 @@ async def read_item(item_id: int,
 
 from pydantic import BaseModel
 from random import random
-
+import subprocess
 
 #######################
 # Like a Django model.
@@ -47,8 +47,15 @@ class Item(BaseModel):
 #############
 # PUT HTTP request
 # can be tested via http://127.0.0.1:8000/items/docs
+# runtime validation, with informative Error responses
 #############
+async def _ponder_on_offer(is_offer: bool, wait: int = 5):
+    subprocess.call(f"sleep {wait}s", shell=True)  # I'm a slow thinker!
+    return True if is_offer and random() < 0.5 else False
+
+
 @app.put("/items/{item_id}")
-async def update_item(item_id: int, item: Item):  # Item sent as serialized JSON string
-    accept_offer = True if item.is_offer and random() < 0.5 else False
+async def update_item(item_id: int,
+                      item: Item):  # Item sent as serialized JSON string
+    accept_offer = await _ponder_on_offer(item.is_offer)
     return {"item_name": item.name, "item_id": item_id, "accept_offer": accept_offer}
