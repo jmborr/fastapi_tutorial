@@ -18,10 +18,13 @@ class Image(BaseModel):
 
 class Item(BaseModel):
     name: str
+    # description cannot exceed 300 characters
     description: Union[str, None] = Field(default=None,
                                           title="The description of the item",
                                           max_length=300)
+    # price cannot be negative
     price: float = Field(gt=0,
+                         example=-3.141592,  # info for the output schema, only validated at runtime!
                          description="The price must be greater than zero")
     image: Optional[Image] = None  # NESTED MODEL
 
