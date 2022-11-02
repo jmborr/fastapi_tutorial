@@ -6,6 +6,8 @@ dependencies:
   - python==3.8
   - fastapi
   - pip
+  - python-multipart
+  - sqlalchemy
   - uvicorn
 
 
